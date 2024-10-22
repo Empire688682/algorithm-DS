@@ -1,27 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const App = () => {
   const students = ["juwon", "daniel", "simba", "rossie", "dan"];
+  const [studentFound, setStudentFound] = useState('');
+  const [index, setIndex] = useState(0);
 
- const findStudents = (allStudent, student) =>{
-  let studentFound = false
-  for (let i = 0; i < allStudent.length; i++){
-    if(allStudent[i] === student){
-      console.log(`${student} found`);
-      studentFound = true 
-      break
-    }
-    if(!studentFound){
-      console.log(`${student} not found`);
+  const checkIsStudent = () =>{
+    let sName = students[index];
+    let upercaseName = sName.concat(" Found ", `${index+1}`).toUpperCase();
+    console.log(upercaseName)
+    setStudentFound(upercaseName)
+    if(sName === students[index]){
+      setIndex(index + 1)
+      if(index === students.length-1){
+        setIndex(0)
+      }
     }
   }
- }
-
- findStudents(students, "juwon")
 
   return (
     <div>
-      <h1>{students[1].aminat}</h1>
+      {
+        studentFound ? <h1>{studentFound}</h1> : <h1>No student found</h1>
+      }
+      <button onClick={ checkIsStudent}>Check student</button>
     </div>
   )
 }
