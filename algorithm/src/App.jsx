@@ -5,25 +5,30 @@ const App = () => {
   const [studentFound, setStudentFound] = useState('');
   const [index, setIndex] = useState(0);
 
-  const checkIsStudent = () =>{
-    let sName = students[index];
-    let upercaseName = sName.concat(" Found ", `${index+1}`).toUpperCase();
-    console.log(upercaseName)
-    setStudentFound(upercaseName)
-    if(sName === students[index]){
-      setIndex(index + 1)
-      if(index === students.length-1){
-        setIndex(0)
+  const checkIsStudent = (name) => {
+      let sName = students[index];
+      if(Object.values(students[index]).toString().split(",").join("") == name){
+        setStudentFound(`yes ${name}`)
+        console.log(`yes ${name}`)
       }
+      else{
+        setStudentFound(sName)
+      }
+      if (sName === students[index]) {
+        setIndex(index + 1)
+        if (index === students.length - 1) {
+          setIndex(0)
+        }
     }
   }
+  let name = "dan"
 
   return (
     <div>
       {
-        studentFound ? <h1>{studentFound}</h1> : <h1>No student found</h1>
+        studentFound ? <h1>{studentFound} Found</h1> : <h1>No student found</h1>
       }
-      <button onClick={ checkIsStudent}>Check student</button>
+      <button onClick={()=>checkIsStudent(name)}>Check for {name}</button>
     </div>
   )
 }
