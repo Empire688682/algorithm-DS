@@ -8,11 +8,10 @@ const App = () => {
   const checkIsStudent = (name) => {
       let sName = students[index];
       if(Object.values(students[index]).toString().split(",").join("") == name){
-        setStudentFound(`yes ${name}`)
-        console.log(`yes ${name}`)
+        setStudentFound(`yes ${name} found`)
       }
       else{
-        setStudentFound(sName)
+        setStudentFound(`${sName} found not ${name}`)
       }
       if (sName === students[index]) {
         setIndex(index + 1)
@@ -26,7 +25,7 @@ const App = () => {
   return (
     <div>
       {
-        studentFound ? <h1>{studentFound} Found</h1> : <h1>No student found</h1>
+        studentFound ? <h1>{studentFound}</h1> : <h1>No student found</h1>
       }
       <button onClick={()=>checkIsStudent(name)}>Check for {name}</button>
     </div>
